@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prueba básica — HTML & CSS</title>
+  <style>
+    /* --- Reset sencillo --- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#222;background:#f6f7fb}
+
+    :root{
+      --accent:#4f46e5;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:12px;
+    }
+
+    .container{max-width:900px;margin:32px auto;padding:20px}
+
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:1.45rem}
+    p.lead{color:var(--muted);margin-top:6px}
+
+    main{display:grid;grid-template-columns:1fr 320px;gap:18px}
+
+    /* tarjeta principal */
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+    .card h2{margin-bottom:8px}
+    .card p{color:var(--muted);line-height:1.45}
+
+    /* formulario de prueba */
+    form{display:flex;flex-direction:column;gap:12px;margin-top:10px}
+    label{font-size:.85rem;color:var(--muted)}
+    input[type=text],input[type=email],textarea,select{
+      width:100%;padding:10px;border:1px solid #e6e8ef;border-radius:8px;font-size:0.95rem
+    }
+    textarea{min-height:100px;resize:vertical}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    button:active{transform:translateY(1px)}
+
+    /* columna derecha */
+    aside .small{font-size:.9rem;color:var(--muted)}
+    .stat{display:flex;justify-content:space-between;margin-top:10px}
+
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.85rem}
+
+    /* responsive */
+    @media (max-width:820px){
+      main{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">AC</div>
+      <div>
+        <h1>Prueba básica de HTML y CSS</h1>
+        <p class="lead">Un ejemplo simple con formulario y diseño responsivo — perfecto para pruebas.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Formulario de prueba</h2>
+        <p>Completa los campos y presiona <strong>Enviar</strong>. Este ejemplo no envía datos a servidor — sólo estructura.</p>
+
+        <form id="prueba-form">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" />
+          </div>
+
+          <div>
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" placeholder="tunombre@ejemplo.com" />
+          </div>
+
+          <div>
+            <label for="tema">Tema</label>
+            <select id="tema" name="tema">
+              <option value="general">General</option>
+              <option value="bug">Reporte de error</option>
+              <option value="sugerencia">Sugerencia</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje..."></textarea>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button type="submit">Enviar</button>
+            <button type="reset" style="background:#efefef;color:#222">Limpiar</button>
+          </div>
+        </form>
+
+        <div id="output" style="margin-top:12px;color:var(--muted);"></div>
+      </section>
+
+      <aside class="card">
+        <div class="small">Información</div>
+        <div class="stat"><strong>Estado:</strong><span>Lista para prueba</span></div>
+        <div class="stat"><strong>Responsive:</strong><span>Sí</span></div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid #f1f3f7" />
+        <div class="small">Instrucciones rápidas:</div>
+        <ul style="margin-top:8px;margin-left:18px;color:var(--muted);">
+          <li>Abrir este archivo en el navegador.</li>
+          <li>Rellenar el formulario y pulsar Enviar.</li>
+          <li>Para usarlo con backend, conecta el <code>action</code> del formulario.</li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      Hecho con ❤️ — ejemplo simple para pruebas.
+    </footer>
+  </div>
+
+  <script>
+    // script mínimo para mostrar los valores al enviar (sin recargar)
+    document.getElementById('prueba-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const obj = Object.fromEntries(data.entries());
+      document.getElementById('output').textContent = `Datos capturados: ${JSON.stringify(obj)}`;
+    });
+  </script>
+</body>
+</html>
